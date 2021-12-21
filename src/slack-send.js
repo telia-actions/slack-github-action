@@ -2,7 +2,7 @@ const github = require('@actions/github');
 const { WebClient } = require('@slack/web-api');
 const flatten = require('flat');
 const axios = require('axios');
-const HttpsProxyAgent = require('https-proxy-agent');
+// const HttpsProxyAgent = require('https-proxy-agent');
 
 const SLACK_WEBHOOK_TYPES = {
   WORKFLOW_TRIGGER: 'WORKFLOW_TRIGGER',
@@ -41,14 +41,16 @@ module.exports = async function slackSend(core) {
     if (typeof botToken !== 'undefined' && botToken.length > 0) {
       const message = core.getInput('slack-message');
       const channelId = core.getInput('channel-id');
-      let web;
+      const web = new WebClient(botToken);
       const proxy = process.env.https_proxy;
-      if (proxy !== 'undefined' && proxy.length > 0) {
-        const proxyAgent = new HttpsProxyAgent(proxy);
-        web = new WebClient(botToken, { agent: proxyAgent });
-      } else {
-        web = new WebClient(botToken);
-      }
+
+      console.log('kazas1', proxy);
+      // if (proxy !== 'undefined' && proxy.length > 0) {
+      //   const proxyAgent = new HttpsProxyAgent(proxy);
+      //   web = new WebClient(botToken, { agent: proxyAgent });
+      // } else {
+      //   web = new WebClient(botToken);
+      // }
 
       if (channelId.length > 0 && (message.length > 0 || payload)) {
         // post message
