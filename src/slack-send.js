@@ -49,7 +49,7 @@ module.exports = async function slackSend(core) {
         web = new WebClient(botToken);
       }
 
-      if (proxy !== 'undefined' && proxy.length > 0) {
+      if (proxy) {
         console.log('proxy yra');
         // const proxyAgent = new HttpsProxyAgent(proxy);
         // web = new WebClient(botToken, { agent: proxyAgent });
