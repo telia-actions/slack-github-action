@@ -41,8 +41,13 @@ module.exports = async function slackSend(core) {
     if (typeof botToken !== 'undefined' && botToken.length > 0) {
       const message = core.getInput('slack-message');
       const channelId = core.getInput('channel-id');
-      const web = new WebClient(botToken);
+      let web;
       const proxy = process.env.https_proxy;
+
+      // eslint-disable-next-line no-constant-condition
+      if (true) {
+        web = new WebClient(botToken);
+      }
 
       console.log('kazas1', proxy);
       // if (proxy !== 'undefined' && proxy.length > 0) {
