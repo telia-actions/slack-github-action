@@ -2,7 +2,7 @@ const github = require('@actions/github');
 const { WebClient } = require('@slack/web-api');
 const flatten = require('flat');
 const axios = require('axios');
-const HttpsProxyAgent = require('https-proxy-agent');
+// const HttpsProxyAgent = require('https-proxy-agent');
 
 const SLACK_WEBHOOK_TYPES = {
   WORKFLOW_TRIGGER: 'WORKFLOW_TRIGGER',
