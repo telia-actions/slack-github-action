@@ -49,13 +49,14 @@ module.exports = async function slackSend(core) {
         web = new WebClient(botToken);
       }
 
-      console.log('kazas1', proxy);
-      // if (proxy !== 'undefined' && proxy.length > 0) {
-      //   const proxyAgent = new HttpsProxyAgent(proxy);
-      //   web = new WebClient(botToken, { agent: proxyAgent });
-      // } else {
-      //   web = new WebClient(botToken);
-      // }
+      if (proxy !== 'undefined' && proxy.length > 0) {
+        console.log('proxy yra');
+        // const proxyAgent = new HttpsProxyAgent(proxy);
+        // web = new WebClient(botToken, { agent: proxyAgent });
+      } else {
+        console.log('proxy nera');
+        // web = new WebClient(botToken);
+      }
 
       if (channelId.length > 0 && (message.length > 0 || payload)) {
         // post message
