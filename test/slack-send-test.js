@@ -2,6 +2,10 @@ const { assert } = require('chai');
 const sinon = require('sinon');
 const core = require('@actions/core');
 const rewiremock = require('rewiremock/node');
+const HttpsProxyAgent = require('https-proxy-agent');
+
+const proxy = process.env.https_proxy;
+const proxyAgent = new HttpsProxyAgent(proxy);
 
 const ChatStub = {
   postMessage: sinon.spy(),
@@ -12,6 +16,7 @@ rewiremock(() => require('@slack/web-api')).with({
     constructor(token) {
       this.token = token;
       this.chat = ChatStub;
+      this.agent = proxyAgent;
     }
   },
 });
