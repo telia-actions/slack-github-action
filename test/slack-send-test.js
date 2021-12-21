@@ -59,7 +59,7 @@ describe('slack-send', () => {
         fakeCore.getInput.withArgs('slack-message').returns('who let the dogs out?');
         fakeCore.getInput.withArgs('channel-id').returns('C123456');
         await slackSend(fakeCore);
-        console.log('labas1 ', fakeCore);
+        console.log('labas1 ', fakeCore.setOutput);
         assert.equal(fakeCore.setOutput.lastCall.firstArg, 'time', 'Output name set to time');
         assert(fakeCore.setOutput.lastCall.lastArg.length > 0, 'Time output a non-zero-length string');
         const chatArgs = ChatStub.postMessage.lastCall.firstArg;
